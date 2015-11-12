@@ -12,9 +12,17 @@
       <when>
         <xpath>/CustInfo[@infotype='LoanCustomer']</xpath>
         <log message="Got Customer file with name ${file:name}"/>
+        <unmarshal>
+          <jaxb contextPath="org.r2m.lab.model" prettyPrint="true" partClass="org.r2m.lab.model.CustInfo"/>
+        </unmarshal>
+        <log message="Customer ID is ${body.nationalID}"/>
       </when>
       <otherwise>
         <log message="Got House file with name ${file:name}"/>
+        <unmarshal>
+          <jaxb contextPath="org.r2m.lab.model" partClass="org.r2m.lab.model.HouseInfo"/>
+        </unmarshal>
+        <log message="House ID is ${body.nationalID}"/>
       </otherwise>
     </choice>
   </route>
