@@ -1,0 +1,15 @@
+# Eclipse
+.classpath
+.project
+.settings/
+build/
+bin/
+
+# Maven
+target/
+
+# Gradle
+.gradle/
+
+# Vagrant
+.vagrant/
