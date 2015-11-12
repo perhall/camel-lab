@@ -6,8 +6,18 @@
        http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
 
   <camelContext xmlns="http://camel.apache.org/schema/blueprint">
-    <route id="routeId">
-    </route>
-  </camelContext>
+  <route id="part1Route">
+    <from uri="file:test/in?include=.*xml"/>
+    <choice>
+      <when>
+        <xpath>/CustInfo[@infotype='LoanCustomer']</xpath>
+        <log message="Got Customer file with name ${file:name}"/>
+      </when>
+      <otherwise>
+        <log message="Got House file with name ${file:name}"/>
+      </otherwise>
+    </choice>
+  </route>
+</camelContext>
 
 </blueprint>
