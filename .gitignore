@@ -13,3 +13,6 @@ target/
 
 # Vagrant
 .vagrant/
+
+# LAB-1
+.camel/
