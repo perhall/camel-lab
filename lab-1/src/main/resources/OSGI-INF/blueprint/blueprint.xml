@@ -22,7 +22,9 @@
         <unmarshal>
           <jaxb contextPath="org.r2m.lab.model" partClass="org.r2m.lab.model.HouseInfo"/>
         </unmarshal>
-        <log message="House ID is ${body.nationalID}"/>
+        <log message="House ID is ${body.nationalID} with appraisedValue ${body.appraisedValue}"/>
+        <bean method="quote" beanType="org.r2m.lab.processor.AppraisalProcessor"/>
+        <log message="House ID is ${body.nationalID} with appraisedValue ${body.appraisedValue}"/>
       </otherwise>
     </choice>
   </route>
