@@ -8,6 +8,12 @@ Thanks to Christina Lin for the example code at [homeloan-part1](https://github.
 > 
 > Thus the workspace will be automatically shared into the vagrant instance.  
 
+# PART--1 PreReq - 
+flik JBoss Central - tab Software/Update - kryssa i Enable Early Access - installera *JBoss Fuse Development*
+
+Låt starta om.
+Välj Perspektive - others - Fuse Integration
+
 # PART-0 Initial Project Setup
 
 ## Github Starting Tag
@@ -42,26 +48,36 @@ Step *PART-0* can be skipped by means of checking out
 ## Add Route "part1Route"
 
 ### Add
+File Pos: lab-1/src/main/resources/OSGI-INF/blueprint/blueprint.xml
+Components ska hittas i det grafiska läget under perspektivet Fuse Integration - högerklick-ment
 
-- Rename route > Id > "part1Route"
-- *Components* > add *File*
-	- Check out the embedded *documentation* tab.  
-	- *Uri* > file:test/in?include=.*xml
-- *Routing* > add *Choice*
+- Rename route > Id > "whatever"  to "part1Route"
+- right click > add *Components* > add *File*
+	- Check out the embedded *documentation* tab.    mark the component, see the Documentation tab under Property window below
+	- *Uri* > file:test/in?include=.*xml		set this value under Properties/Generic  
+- *Routing* > add *Choice*				right-hand pop-in menu
 - *Routing* > add *When*
-	- Check out structure of *homeloancust.xml* in order to set the proper expression 
-	- *Language* > xpath
-	- *Expression* > /CustInfo[@infotype='LoanCustomer'] 
+	- Check out structure of *homeloancust.xml* in order to set the proper expression 	in lab-1/Z-PRE-PREQUISITES/xmls/ ...
+	- *Language* > xpath						\ we can get LoanCustomer or HouseInfo files from that directory above
+	- *Expression* > /CustInfo[@infotype='LoanCustomer'] 		
 - *Routing* > add *Otherwise*
 - *Components* > add *Log*
 	- *Message* > "Got Customer file with name ${file:name}"
-- Select project > *Run As* > mvn clean install
+- Draw arrows between the chains - the Log above is after the WHEN-box, make another after the OTHERWISE-box
+- Select filetree : project "lab-1" rightclick > *Run As* > mvn clean install
+- (( right-click blueprint.xml > Run As > 2. Local Camel Context is the same cannot be done before the above has built the project ))
 
 ### Test
 
-- Select project > *Run As* > mvn camel:run
+- Select project > *Run As* > mvn camel:run	projectname - rightclick - other - Maven Build - Goal= "camel:run" + Name it +´Base Dir=lab-1 + Apply + Run
 - Copy files from /lab-one/Z-PRE-PREQUISITES/xmls to /lab-one/test/in 
 	- logs should show that route consumes files
+
+
+# MELLANSPEL: Virtuella maskinen, starta JBOSS
+
+Har inte jboss packats upp vid uinstallation, unzippa jboss...zip på lämplig plats, starta med bin/fuse
+http://localhost:18181/hawtio/login	- id r2m/r2m
 
 # PART-2 Add JAXB Unmarshaller
 
